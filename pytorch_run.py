@@ -82,14 +82,14 @@ if train_on_gpu:
 model_Inputs = [U_Net, R2U_Net, AttU_Net, R2AttU_Net, NestedUNet]
 
 
-def model_unet(model_input, in_channel=3, out_channel=1):
+def model_unet(model_input, in_channel=1, out_channel=5):
     model_test = model_input(in_channel, out_channel)
     return model_test
 
 #passsing this string so that if it's AttU_Net or R2ATTU_Net it doesn't throw an error at torchSummary
 
 
-model_test = model_unet(model_Inputs[0], 3, 1)
+model_test = model_unet(model_Inputs[2], 1, 5)
 
 model_test.to(device)
 
@@ -97,18 +97,18 @@ model_test.to(device)
 #Getting the Summary of Model
 #######################################################
 
-torchsummary.summary(model_test, input_size=(3, 128, 128))
+torchsummary.summary(model_test, input_size=(1, 360, 448))
 
 #######################################################
 #Passing the Dataset of Images and Labels
 #######################################################
 
-t_data = '/flush1/bat161/segmentation/New_Trails/venv/DATA/new_3C_I_ori/'
-l_data = '/flush1/bat161/segmentation/New_Trails/venv/DATA/new_3C_L_ori/'
-test_image = '/flush1/bat161/segmentation/New_Trails/venv/DATA/test_new_3C_I_ori/0131_0009.png'
-test_label = '/flush1/bat161/segmentation/New_Trails/venv/DATA/test_new_3C_L_ori/0131_0009.png'
-test_folderP = '/flush1/bat161/segmentation/New_Trails/venv/DATA/test_new_3C_I_ori/*'
-test_folderL = '/flush1/bat161/segmentation/New_Trails/venv/DATA/test_new_3C_L_ori/*'
+t_data = '/content/Dataset/imr/'
+l_data = '/content/Dataset/masks/'
+test_image = '/content/Dataset/test/IMG_0034.png'
+test_label = '/content/Dataset/test/IMG_0034Mask.png'
+test_folderP = '/content/Dataset/test/*'
+test_folderL = '/content/Dataset/test/*'
 
 Training_Data = Images_Dataset_folder(t_data,
                                       l_data)

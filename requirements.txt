@@ -1,5 +1,4 @@
-python=3.6
-torch=0.4.0
+torch
 torchvision
 torchsummary
 tensorboardx
